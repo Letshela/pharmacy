@@ -31,6 +31,31 @@ h2{color:#6a1b9a;text-align:center;margin:25px 0 15px;font-size:24px}
 </style>
 </head>
 <body>
+  <div id="loginGate" style="position:fixed;inset:0;background:#0f3d2e;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:white;padding:30px;border-radius:16px;width:100%;max-width:360px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.3)">
+    <h2 style="margin:0 0 5px;color:#0f3d2e">🏥 Holeni Pharmacy</h2>
+    <p style="color:#666;margin:0 0 20px">Staff Login Only</p>
+    <input id="staffPass" type="password" placeholder="Enter Staff Password" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;font-size:16px;box-sizing:border-box">
+    <button onclick="checkPass()" style="width:100%;margin-top:12px;padding:14px;background:#25D366;color:white;border:none;border-radius:10px;font-weight:bold;font-size:16px;cursor:pointer">Login</button>
+    <p id="loginError" style="color:red;display:none;margin-top:10px">Wrong password. Try again.</p>
+    <p style="font-size:12px;color:#999;margin-top:15px">Contact Admin: 082 431 1945</p>
+  </div>
+</div>
+<script>
+function checkPass(){
+  var p = document.getElementById('staffPass').value;
+  if(p === 'Holeni2026'){
+    sessionStorage.setItem('holeniLogin','yes');
+    document.getElementById('loginGate').style.display='none';
+  } else {
+    document.getElementById('loginError').style.display='block';
+  }
+}
+if(sessionStorage.getItem('holeniLogin')==='yes'){
+  document.getElementById('loginGate').style.display='none';
+}
+document.getElementById('staffPass').addEventListener('keydown', function(e){ if(e.key==='Enter'){ checkPass(); } });
+</script>
 <div class="hero">
 <h1>💊 Holeni Pharmacy</h1>
 <p>Your Health, Our Priority | Centurion, Gauteng</p>
