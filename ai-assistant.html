@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Holeni Pharmacy - AI Assistant</title>
+<style>
+body { font-family: Arial; max-width: 600px; margin: 20px auto; padding: 15px; }
+#chat { border: 1px solid #ccc; height: 400px; overflow-y: auto; padding: 10px; border-radius: 10px; }
+.user { text-align: right; color: blue; margin: 10px 0; }
+.ai { text-align: left; color: #333; margin: 10px 0; background: #f0f0f0; padding: 8px; border-radius: 8px; }
+input { width: 75%; padding: 10px; }
+button { padding: 10px 15px; background: #007bff; color: white; border: none; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+<h2>💊 Holeni Pharmacy - AI Assistant</h2>
+<p>Ask about medicines, stock, or prescriptions</p>
+
+<div id="chat"></div><br>
+<input id="question" placeholder="e.g. What is Amoxicillin for?">
+<button onclick="askAI()">Ask</button>
+
+<script>
+// Simple AI brain - works without API key
+function getAnswer(q) {
+  q = q.toLowerCase();
+  if (q.includes("amoxicillin")) return "Amoxicillin is an antibiotic used to treat bacterial infections. Dosage must be as prescribed by a doctor. Check stock in the Stock module.";
+  if (q.includes("panado") || q.includes("paracetamol")) return "Panado (Paracetamol) is used for pain and fever. Adult dose is usually 500mg - 1000mg every 4-6 hours, max 4000mg per day. Check with pharmacist.";
+  if (q.includes("stock")) return "To check stock, go to Stock module. Low stock items are highlighted. You can also ask me: 'Do we have Panado?'";
+  if (q.includes("prescription")) return "To create a prescription, go to Prescriptions > New. Enter patient name, medicine, quantity and dosage.";
+  if (q.includes("sale")) return "To record a sale, go to Sales > New Sale. Select medicine, quantity, and it will calculate total.";
+  return "I can help with medicines, stock, sales and prescriptions. Try asking: 'What is Amoxicillin for?' or 'How do I check stock?'";
+}
+
+function askAI() {
+  let input = document.getElementById("question");
+  let chat = document.getElementById("chat");
+  let question = input.value;
+  if (!question) return;
+  
+  chat.innerHTML += `<div class="user">You: ${question}</div>`;
+  chat.innerHTML += `<div class="ai">AI: ${getAnswer(question)}</div>`;
+  input.value = "";
+  chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+</body>
+</html>
